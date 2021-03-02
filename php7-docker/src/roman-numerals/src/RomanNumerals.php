@@ -9,54 +9,42 @@ class RomanNumerals
      * @param int $decimalNum
      * @return String roman numeral for given decimal number
      * @example if the given number is not valid, return ""
-     * @see isValidNum()
+     * @see isInt()
+     * @see isGreaterZero()
      */
     public function decimal2roman( int $decimalNum ) : String {
 
-        $romanNumbers =
+        $romanNumeral = "";
+
+        $decimalRomanAssoc =
             array(
-                1 => 'I',
-                5 => 'V',
-                10 => 'X',
-                50 => 'L',
-                100 => 'C',
+                1000 => 'M',
                 500 => 'D',
-                1000 => 'M'
+                100 => 'C',
+                50 => 'L',
+                10 => 'X',
+                5 => 'V',
+                1 => 'I'
             );
 
         if ( !$this->isInt( $decimalNum ) ) {
-            return "";
+            return "Given value is not int. Expected: integer number.";
         }
 
         if ( !$this->isGreaterZero( $decimalNum ) ) {
-            return "";
+            return "Given value is not greater than zero. Expected: gr";
         }
 
-        if ( $decimalNum === 1 ) {
-            return $romanNumbers[ (string) 1 ];
+        foreach ( $decimalRomanAssoc as $decimal => $roman ) {
+
+            $romanNumAppearances = (int) ( $decimalNum / $decimal );
+
+            $romanNumeral .= str_repeat( $roman, $romanNumAppearances );
+
+            $decimalNum %= $decimal;
         }
 
-        if ( $decimalNum === 5 ) {
-            return $romanNumbers[ (string) 5 ];
-        }
-
-        if ( $decimalNum === 10 ) {
-            return $romanNumbers[ (string) 10 ];
-        }
-
-        if ( $decimalNum === 50 ) {
-            return $romanNumbers[ (string) 50 ];
-        }
-
-        if ( $decimalNum === 100 ) {
-            return $romanNumbers[(string)100];
-        }
-
-        if ( $decimalNum === 1000 ) {
-            return $romanNumbers[(string)1000];
-        }
-
-        return "";
+        return $romanNumeral;
     }
 
     /**
@@ -80,5 +68,6 @@ class RomanNumerals
         return $num > 0;
 
     }
+
 
 }
