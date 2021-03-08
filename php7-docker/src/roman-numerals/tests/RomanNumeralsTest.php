@@ -13,27 +13,28 @@ class RomanNumeralsTest extends TestCase
     public function checkNumberGreaterZero(): void
     {
 
-        define("ACTUAL", 0);
-        define('EXPECTED', "");
+        $actual = -12;
+        $expected = "";
 
         $romanNumeral = new RomanNumerals();
 
-        self::assertEquals( EXPECTED, $romanNumeral->isGreaterZero( ACTUAL ) );
+        self::assertEquals( $expected, $romanNumeral->decimal2roman( $actual ) );
 
     }
 
     /**
      * @test
+     * This test does not make sense because variables are been
+     * casted to integer when passing it as function parameters.
      */
     public function checkNumberIsInt(): void
     {
-
-        define("ACTUAL", 1.2);
-        define("EXPECTED", "");
+        $actual = 1.2;
+        $expected = "";
 
         $romanNumeral = new RomanNumerals();
 
-        self::assertEquals( EXPECTED, $romanNumeral->isInt( ACTUAL ));
+        self::assertEquals( $expected, $romanNumeral->decimal2roman( $actual ));
 
     }
 
@@ -43,17 +44,17 @@ class RomanNumeralsTest extends TestCase
     public function checkSingleSymbols(): void
     {
 
-        define("ACTUAL", 1);
-        define('EXPECTED', 'J');
+        $actual = 50;
+        $expected ="L";
 
         $romanNumeral = new RomanNumerals();
 
-        self::assertEquals(EXPECTED, $romanNumeral->decimal2roman( ACTUAL ) );
+        self::assertEquals($expected, $romanNumeral->decimal2roman( $actual ) );
     }
 
     /**
      * @test
-     * 
+     * Roman symbols refer to the letters that forms Roman Numerical System.
      */
     public function checkRomanSymbols(): void
     {
@@ -80,12 +81,13 @@ class RomanNumeralsTest extends TestCase
      **/
     public function checkSubtraction(): void
     {
-        define("ACTUAL", 4);
-        define("EXPECTED", "IV");
+
+        $actual = 4;
+        $expected = "IV";
 
         $romanNumeral = new RomanNumerals();
 
-        self::assertEquals( EXPECTED, $romanNumeral->decimal2roman( (int) ACTUAL ) );
+        self::assertEquals( $expected, $romanNumeral->decimal2roman( $actual ) );
 
     }
 
@@ -94,12 +96,13 @@ class RomanNumeralsTest extends TestCase
      **/
     public function checkAddition(): void
     {
-        define("ACTUAL", 6);
-        define("EXPECTED", "VI");
+
+        $actual = 6;
+        $expected = "VI";
 
         $romanNumeral = new RomanNumerals();
 
-        self::assertEquals( EXPECTED, $romanNumeral->decimal2roman( (int) ACTUAL ) );
+        self::assertEquals( $expected, $romanNumeral->decimal2roman( $actual ) );
 
     }
 
@@ -108,12 +111,12 @@ class RomanNumeralsTest extends TestCase
      **/
     public function checkGeneralNumbers( ): void
     {
-        define("ACTUAL", 512);
-        define("EXPECTED", "DXXI");
+        $actual = 512;
+        $expected = "DXII";
 
         $romanNumeral = new RomanNumerals();
 
-        self::assertEquals( EXPECTED, $romanNumeral->decimal2roman( (int) ACTUAL ) );
+        self::assertEquals( $expected, $romanNumeral->decimal2roman( $actual ) );
     }
 
 }
