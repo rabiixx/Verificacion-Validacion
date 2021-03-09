@@ -8,23 +8,54 @@ use Deg540\PHPTestingBoilerplate\Player;
 class TennisGame
 {
 
-    public String $player1;
-    public String $player2;
+    private String $playerOneName;
+    private String $playerTwoName;
+    private int $playerOnePoints;
+    private int $playerTwoPoints;
 
     /**
      * TennisGame constructor.
-     * @param string $player1Name
-     * @param string $player2Name
+     * @param string $playerOneName
+     * @param string $playerTwoName
      */
-    public function __construct( string $player1Name, string $player2Name )
+    public function __construct( string $playerOneName, string $playerTwoName )
     {
-        $this->player1 = $player1Name;
-        $this->player2 = $player2Name;
+        $this->playerOneName = $playerOneName;
+        $this->playerTwoName = $playerTwoName;
+        $this->playerOnePoints = 0;
+        $this->playerTwoPoints = 0;
     }
 
+    public function wonPoint( String $playerName ) : void {
 
-    public function getScore() : string {
-        return "Fifteen - Love";
+        if ( $playerName === $this->playerOneName ) {
+            ++$this->playerOnePoints;
+        }
+
+        if ( $playerName === $this->playerTwoName ) {
+            ++$this->playerTwoPoints;
+        }
+
+    }
+
+    public function getScore() : String {
+
+        if ( $this->playerOnePoints === 1
+            && $this->playerTwoPoints === 0 ) {
+            return "Fifteen - Love";
+        }
+
+        if ( $this->playerOnePoints === 2
+            && $this->playerTwoPoints === 0 ) {
+            return "Love - Fifteen";
+        }
+
+        if ( $this->playerOnePoints === 0
+            && $this->playerTwoPoints === 2 ) {
+            return "Thirty - Love";
+        }
+
+        return "Love all";
     }
 
 }

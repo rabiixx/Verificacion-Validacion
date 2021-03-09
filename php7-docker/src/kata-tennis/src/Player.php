@@ -6,6 +6,7 @@ class Player
 {
     private string $name;
     private int $currentPoints;
+
     /**
      * Player constructor.
      * @param string $name
