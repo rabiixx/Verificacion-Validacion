@@ -4,6 +4,7 @@
 namespace Deg540\PHPTestingBoilerplate;
 
 use Deg540\PHPTestingBoilerplate\Player;
+use phpDocumentor\Reflection\Types\Boolean;
 
 class TennisGame
 {
@@ -12,6 +13,7 @@ class TennisGame
     private String $playerTwoName;
     private int $playerOnePoints;
     private int $playerTwoPoints;
+    private array $arr;
 
     /**
      * TennisGame constructor.
@@ -24,6 +26,15 @@ class TennisGame
         $this->playerTwoName = $playerTwoName;
         $this->playerOnePoints = 0;
         $this->playerTwoPoints = 0;
+
+        $this->arr = array(
+            0 => 'Love',
+            1 => 'Fifteen',
+            2 => 'Thirty',
+            3 => 'Forty'
+        );
+
+
     }
 
     public function wonPoint( String $playerName ) : void {
@@ -40,22 +51,24 @@ class TennisGame
 
     public function getScore() : String {
 
-        if ( $this->playerOnePoints === 1
-            && $this->playerTwoPoints === 0 ) {
-            return "Fifteen - Love";
+        if ( $this->isDeuce() ) {
+            return "Deuce";
         }
 
-        if ( $this->playerOnePoints === 2
-            && $this->playerTwoPoints === 0 ) {
-            return "Love - Fifteen";
+        if ( $this->areTied() ) {
+            return $this->arr[ $this->playerOnePoints ] . "All";
         }
 
-        if ( $this->playerOnePoints === 0
-            && $this->playerTwoPoints === 2 ) {
-            return "Thirty - Love";
-        }
+        return $this->arr[ $this->playerOnePoints ] . " - " . $this->arr[ $this->playerTwoPoints ];
 
-        return "Love all";
+    }
+
+    private function areTied() : Boolean {
+        return ( $this->playerOnePoints === $this->playerTwoPoints );
+    }
+
+    private function isDeuce() : Boolean {
+        return ( ( $this->playerOnePoints === 40 ) && ( $this->playerOnePoints === $this->playerTwoPoints ) );
     }
 
 }

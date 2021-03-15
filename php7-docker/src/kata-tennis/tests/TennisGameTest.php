@@ -33,4 +33,38 @@ class TennisGameTest extends TestCase
 
     }
 
+    /**
+     * @test
+     **/
+    public function if_both_won_point_then_both_fifteen() : void {
+
+        $tennisGame = new TennisGame("Ruben", "Alvaro");
+
+        $tennisGame->wonPoint( "Ruben" );
+        $tennisGame->wonPoint( "Alvaro" );
+
+        self::assertEquals("Fifteen All", $tennisGame->getScore() );
+
+    }
+
+    /**
+     * @test
+     */
+    public function if_both_forty_then_deuce(  ) : void {
+
+        $tennisGame = new TennisGame("Ruben", "Alvaro");
+
+        $tennisGame->wonPoint( "Ruben" );
+        $tennisGame->wonPoint( "Alvaro" );
+
+        $tennisGame->wonPoint( "Ruben" );
+        $tennisGame->wonPoint( "Alvaro" );
+
+        $tennisGame->wonPoint( "Ruben" );
+        $tennisGame->wonPoint( "Alvaro" );
+
+        self::assertEquals("Deuce", $tennisGame->getScore() );
+
+    }
+
 }
