@@ -15,7 +15,7 @@ class TennisGameTest extends TestCase
 
         $tennisGame = new TennisGame( "a", "b" );
 
-        self::assertEquals( "Love all", $tennisGame->getScore() );
+        self::assertEquals( "Love All", $tennisGame->getScore() );
 
     }
 
@@ -64,6 +64,143 @@ class TennisGameTest extends TestCase
         $tennisGame->wonPoint( "Alvaro" );
 
         self::assertEquals("Deuce", $tennisGame->getScore() );
+
+    }
+
+    /**
+     * @test
+     */
+    public function if_player1_wins_without_advantage_then_win_player1() : void {
+
+        $tennisGame = new TennisGame("Ruben", "Alvaro");
+
+        $tennisGame->wonPoint( "Ruben" );
+        $tennisGame->wonPoint( "Ruben" );
+        $tennisGame->wonPoint( "Ruben" );
+
+        self::assertEquals("Win Ruben", $tennisGame->getScore() );
+
+    }
+
+    /**
+     * @test
+     */
+    public function check_deuce() : void {
+
+        $tennisGame = new TennisGame("Ruben", "Alvaro");
+
+        $tennisGame->wonPoint( "Ruben" );
+        $tennisGame->wonPoint( "Alvaro" );
+
+        $tennisGame->wonPoint( "Ruben" );
+        $tennisGame->wonPoint( "Alvaro" );
+
+        $tennisGame->wonPoint( "Ruben" );
+        $tennisGame->wonPoint( "Alvaro" );
+
+
+        self::assertEquals("Deuce", $tennisGame->getScore() );
+
+    }
+
+    /**
+     * @test
+     */
+    public function check_advantage() : void {
+
+        $tennisGame = new TennisGame("Ruben", "Alvaro");
+
+        $tennisGame->wonPoint( "Ruben" );
+        $tennisGame->wonPoint( "Alvaro" );
+
+        $tennisGame->wonPoint( "Ruben" );
+        $tennisGame->wonPoint( "Alvaro" );
+
+        $tennisGame->wonPoint( "Ruben" );
+        $tennisGame->wonPoint( "Alvaro" );
+
+
+        $tennisGame->wonPoint( "Ruben" );
+
+
+        self::assertEquals("Advantage Ruben", $tennisGame->getScore() );
+
+    }
+
+
+
+    /**
+     * @test
+     */
+    public function player1_wins_after_advantage() : void {
+
+        $tennisGame = new TennisGame("Ruben", "Alvaro");
+
+        $tennisGame->wonPoint( "Ruben" );
+        $tennisGame->wonPoint( "Alvaro" );
+
+        $tennisGame->wonPoint( "Ruben" );
+        $tennisGame->wonPoint( "Alvaro" );
+
+        $tennisGame->wonPoint( "Ruben" );
+        $tennisGame->wonPoint( "Alvaro" );
+
+
+        $tennisGame->wonPoint( "Ruben" );
+        $tennisGame->wonPoint( "Ruben" );
+
+
+        self::assertEquals("Win Ruben", $tennisGame->getScore() );
+
+    }
+
+    /**
+     * @test
+     */
+    public function return_to_deuce_after_advantage() : void {
+
+        $tennisGame = new TennisGame("Ruben", "Alvaro");
+
+        $tennisGame->wonPoint( "Ruben" );
+        $tennisGame->wonPoint( "Alvaro" );
+
+        $tennisGame->wonPoint( "Ruben" );
+        $tennisGame->wonPoint( "Alvaro" );
+
+        $tennisGame->wonPoint( "Ruben" );
+        $tennisGame->wonPoint( "Alvaro" );
+
+        $tennisGame->wonPoint( "Ruben" );
+        $tennisGame->wonPoint( "Alvaro" );
+
+        self::assertEquals("Deuce", $tennisGame->getScore() );
+
+    }
+
+
+    /**
+     * @test
+     */
+    public function check_player2_comeback() : void {
+
+        $tennisGame = new TennisGame("Ruben", "Alvaro");
+
+        $tennisGame->wonPoint( "Ruben" );
+        $tennisGame->wonPoint( "Alvaro" );
+
+        $tennisGame->wonPoint( "Ruben" );
+        $tennisGame->wonPoint( "Alvaro" );
+
+        $tennisGame->wonPoint( "Ruben" );
+        $tennisGame->wonPoint( "Alvaro" );
+
+        $tennisGame->wonPoint( "Ruben" );
+        $tennisGame->wonPoint( "Alvaro" );
+
+        $tennisGame->wonPoint( "Alvaro" );
+        $tennisGame->wonPoint( "Alvaro" );
+
+        self::assertEquals("Win Alvaro", $tennisGame->getScore() );
 
     }
 
