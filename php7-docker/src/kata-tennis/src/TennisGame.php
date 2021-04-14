@@ -133,7 +133,7 @@ class TennisGame
         return "";
 
     }
-    
+
     private function areTied() : bool {
         return ( $this->playerOnePoints === $this->playerTwoPoints );
     }
